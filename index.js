@@ -11,6 +11,9 @@ const client = new Client({
     ]
 });
 
+const token = process.env.token
+const countingChannelId = process.env.countingChannelId
+
 let count = 0;
 let lastUserId = null;
 
