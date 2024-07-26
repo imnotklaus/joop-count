@@ -18,7 +18,14 @@ let count = 0;
 let lastUserId = null;
 
 client.once('ready', () => {
-    console.log('Ready!');
+    console.log('Ready! Logged in as ${client.user.tag}.');
+        client.user.setPresence({
+      activities: [{ 
+        name: "brat",
+        type: "LISTENING"
+      }],
+      status: "online"
+  })
 });
 
 client.on('messageCreate', message => {
