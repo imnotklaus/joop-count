@@ -1,13 +1,10 @@
 const { Client, Intents, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
-//const config = require('./config.json');
-//const token = require('/process.env')
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
-        //GatewayIntentBits.MessageReactionAdd
     ]
 });
 
@@ -16,6 +13,7 @@ const countingChannelId = process.env.countingChannelId
 
 let count = 0;
 let lastUserId = null;
+let nextNum = count + 1;
 
 client.once('ready', () => {
     console.log('Ready! Logged in as ${client.user.tag}.');
@@ -35,15 +33,15 @@ client.on('messageCreate', message => {
             return;
         }
 
-        if (message.author.id === lastUserId || num !== count + 1) {
+        if (message.author.id === lastUserId || num !== nextNum) {
             message.react('❌');
+            message.channel.send(`<@${message.author.id}> can't count! They fucked it up at **${nextNum}**. The next number is **1**.`);
             count = 0;
-            message.channel.send(`<@${message.author.id}> can't count! They fucked it up at **${num}**. The next number is **${count+1}**.`);
             lastUserId = null;
         } else if (message.author.id === lastUserId) {
                 message.react('❌');
                 count = 0;
-                message.channel.send(`You can't do two numbers in a row! <@${message.author.id}> fucked it up at **${num}**. The next number is **${count+1}**.`);
+                message.channel.send(`You can't do two numbers in a row! <@${message.author.id}> fucked it up at **${nextNum}**. The next number is **1**.`);
                 lastUserId = null;
             }
          else {
