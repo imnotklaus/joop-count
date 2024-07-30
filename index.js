@@ -1,5 +1,6 @@
 const { Client, Intents, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
+const { token, countingChannelId } = require('config.json');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -7,9 +8,6 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
     ]
 });
-
-const token = process.env.token
-const countingChannelId = process.env.countingChannelId
 
 let count = 0;
 let lastUserId = null;
