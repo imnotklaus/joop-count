@@ -17,7 +17,7 @@ client.once('ready', () => {
     console.log(`Ready! Logged in as ${client.user.tag}.`);
     client.user.setPresence({
         activities: [{ 
-            name: "counting numbers",
+            name: "brat",
             type: ActivityType.Listening
         }],
         status: "online"
